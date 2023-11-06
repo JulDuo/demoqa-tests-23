@@ -4,8 +4,6 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byValue;
 import static com.codeborne.selenide.Selenide.$;
@@ -16,12 +14,12 @@ public class TextBoxTest {
     static void beforeAll(){
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
+        Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 5000;
     }
 
     @Test
     void fillFormTest () {
-        Configuration.pageLoadStrategy = "eager";
 
         open("/automation-practice-form");
 
@@ -40,15 +38,14 @@ public class TextBoxTest {
         $("[for=hobbies-checkbox-2]").click();
         $("[for=hobbies-checkbox-3]").click();
 
-        File file = new File("D:/QA/HW/hw1.jpg");
-        $("#uploadPicture").uploadFile(file);
+        $("#uploadPicture").uploadFromClasspath("hw1.jpg");
 
         $("#currentAddress").setValue("Rasskazova st 2");
 
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#react-select-4-input").setValue("Delhi").pressEnter();
 
-        $("[id=submit]").pressEnter();
+        $("#submit").pressEnter();
     }
 }
 
